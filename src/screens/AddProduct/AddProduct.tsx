@@ -7,15 +7,18 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import { Calendar, QrCode, ArrowLeft } from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
-import { CustomInputBox } from "../components";
+import { CustomInputBox } from "../../components";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { moderateScale } from "../utils/scalingUtils";
+import { moderateScale } from "../../utils/scalingUtils";
+import axios from "axios";
+import { BASE_URL } from "../../store/config";
 
-export const AppProduct = () => {
+export const AddProduct = () => {
   const navigation = useNavigation();
 
   const [qrPermission, setQrPermission] = useState(null);
@@ -25,35 +28,37 @@ export const AppProduct = () => {
   const [qrCode, setQrCode] = useState("");
   const [productName, setProductName] = useState("");
   const [initialStock, setInitialStock] = useState("");
-  const [costPrice, setCostPrice] = useState("");
+
   const [date, setDate] = useState(new Date());
-  const [basePrice, setBasePrice] = useState("0");
-  const [notes, setNotes] = useState("");
+  const handleSave = async () => {
+    if (!qrCode || !productName) {
+      Alert.alert("Missing fields", "Please enter QR Code and Product Name.");
+      return;
+    }
 
-  const handleSave = () => {
-    const productData = {
-      qrCode,
-      productName,
-      initialStock,
-      costPrice,
-      date: date.toDateString(),
-      basePrice,
-      notes,
-    };
+    try {
+      const payload = {
+        qrcode: qrCode,
+        productName,
+        totalQuantity: Number(initialStock) || 0,
+      };
 
-    console.log("✅ Product Saved Successfully!");
-    console.log("📦 Product Details:", JSON.stringify(productData, null, 2));
+      const response = await axios.post(`${BASE_URL}/products`, payload);
+
+      Alert.alert("Success", "Product added successfully!");
+
+      navigation.goBack();
+    } catch (err) {
+      console.error(err);
+      Alert.alert("Error", err.response?.data?.message || "Server error");
+    }
   };
 
-  const handleSaveAndCreateAgain = () => {
-    console.log("🔁 Product saved and resetting form...");
+  const handleSaveAndCreateAgain = async () => {
+    await handleSave();
     setQrCode("");
     setProductName("");
     setInitialStock("");
-    setCostPrice("");
-    setDate(new Date());
-    setBasePrice("0");
-    setNotes("");
   };
 
   const handleDateChange = (event, selectedDate) => {
@@ -67,7 +72,7 @@ export const AppProduct = () => {
     if (status === "granted") {
       setShowScanner(true);
     } else {
-      alert("Camera permission is required to scan QR codes");
+      Alert.alert("Permission Denied", "Camera permission is required to scan QR codes");
     }
   };
 
@@ -106,7 +111,6 @@ export const AppProduct = () => {
           <Text style={styles.heading}>Add Product</Text>
         </View>
         <ScrollView
-          style={{ flex: 1 }}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: moderateScale(100) }}
         >
@@ -137,13 +141,6 @@ export const AppProduct = () => {
             />
 
             <CustomInputBox
-              label="Cost Price"
-              value={costPrice}
-              onChangeText={setCostPrice}
-              placeholder="Enter cost price"
-            />
-
-            <CustomInputBox
               label="Date"
               value={date.toDateString()}
               onChangeText={() => {}}
@@ -162,27 +159,6 @@ export const AppProduct = () => {
             )}
           </View>
 
-          <View style={styles.priceContainer}>
-            <Text style={styles.sectionTitle}>Selling Price</Text>
-            <CustomInputBox
-              label="Base Price"
-              value={basePrice}
-              onChangeText={setBasePrice}
-              placeholder="Enter base price"
-            />
-          </View>
-
-          <View style={styles.notesContainer}>
-            <Text style={styles.sectionTitle}>Add Notes</Text>
-            <CustomInputBox
-              value={notes}
-              onChangeText={setNotes}
-              placeholder="Enter any additional details..."
-              numberOfLines={4}
-            />
-          </View>
-
-          {/* Buttons */}
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[styles.button, styles.saveButton]}
@@ -231,34 +207,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 3,
     marginBottom: moderateScale(20),
-  },
-  priceContainer: {
-    backgroundColor: "#fff",
-    borderRadius: moderateScale(16),
-    padding: moderateScale(16),
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
-    marginBottom: moderateScale(20),
-  },
-  notesContainer: {
-    backgroundColor: "#fff",
-    borderRadius: moderateScale(16),
-    padding: moderateScale(16),
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
-    marginBottom: moderateScale(20),
-  },
-  sectionTitle: {
-    fontSize: moderateScale(18),
-    fontWeight: "700",
-    color: "#000",
-    marginBottom: moderateScale(10),
   },
   buttonContainer: {
     flexDirection: "row",

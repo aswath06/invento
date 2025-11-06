@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AppProduct, Dashboard } from '../screens';
+import { AddProduct, Dashboard, Stockin, Stockout } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,17 @@ const AppNavigator = () => {
         />
         <Stack.Screen
           name="AppProduct"
-          component={AppProduct}
+          component={AddProduct}
+          options={{headerShown: false }}
+        />
+        <Stack.Screen
+          name="Stockin"
+          component={Stockin}
+          options={{headerShown: false }}
+        />
+          <Stack.Screen
+          name="Stockout"
+          component={Stockout}
           options={{headerShown: false }}
         />
       </Stack.Navigator>

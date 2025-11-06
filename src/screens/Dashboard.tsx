@@ -14,8 +14,8 @@ export const Dashboard = () => {
     {
       title: "Transactions",
       items: [
-        { label: "Stock In", icon: "arrow-down", color: "#16A34A", navigateTo: "StockInScreen" },
-        { label: "Stock Out", icon: "arrow-up", color: "#DC2626", navigateTo: "StockOutScreen" },
+        { label: "Stock In", icon: "arrow-down", color: "#16A34A", navigateTo: "Stockin" },
+        { label: "Stock Out", icon: "arrow-up", color: "#DC2626", navigateTo: "Stockout" },
       ],
     },
     {
