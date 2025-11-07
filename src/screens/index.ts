@@ -3,3 +3,7 @@ export * from './Stockin';
 export * from './AddProduct';
 export * from './Stockin';
 export * from './Stockout';
+export * from './ViewProducts';
+export * from './UpdateProducts';
+export * from './VendorScreen';
+export * from './CustomerScreen';

@@ -1,1 +1,1 @@
-export const BASE_URL = "http://192.169.0.26:3000/api";
+export const BASE_URL = "https://inventobackend-3wb2.onrender.com/api";

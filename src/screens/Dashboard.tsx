@@ -22,14 +22,14 @@ export const Dashboard = () => {
       title: "Product Management",
       items: [
         { label: "View Products", icon: "view", color: "#3B82F6", navigateTo: "ViewProducts" },
-        { label: "Update Product", icon: "update", color: "#F59E0B", navigateTo: "UpdateProduct" },
+        { label: "Update Product", icon: "update", color: "#F59E0B", navigateTo: "UpdateProducts" },
       ],
     },
     {
       title: "People Management",
       items: [
-        { label: "Vendors", icon: "vendors", color: "#16A34A", navigateTo: "VendorsScreen" },
-        { label: "Customers", icon: "customers", color: "#F59E0B", navigateTo: "CustomersScreen" },
+        { label: "Vendors", icon: "vendors", color: "#16A34A", navigateTo: "VendorScreen" },
+        { label: "Customers", icon: "customers", color: "#F59E0B", navigateTo: "CustomerScreen" },
       ],
     },
   ];
@@ -41,7 +41,7 @@ export const Dashboard = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        <Text style={styles.heading}>Aswath Hollow Bricks</Text>
+        <Text style={styles.heading}>Echo Invento</Text>
 
         <StatsCard
           stockIn="1200"

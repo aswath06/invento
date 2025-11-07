@@ -14,7 +14,7 @@ export default StyleSheet.create({
   backButton: { paddingRight: moderateScale(10) },
   title: { color: "#fff", fontSize: moderateScale(18), fontWeight: "bold" },
   content: { padding: moderateScale(16) },
-  label: { fontSize: moderateScale(16), fontWeight: "600", marginBottom: moderateScale(8), color: "#333" },
+  label: { fontSize: moderateScale(16), fontWeight: "600", marginBottom: moderateScale(8), color: "#000" },
   dropdown: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     paddingHorizontal: moderateScale(16),
     justifyContent: "center",
   },
-  dropdownText: { fontSize: moderateScale(15), color: "#333" },
+  dropdownText: { fontSize: moderateScale(15), color: "#000" },
   modalOverlay: { flex: 1, justifyContent: "flex-end", backgroundColor: "rgba(0,0,0,0.4)" },
   modalContainer: {
     backgroundColor: "#fff",
@@ -61,7 +61,7 @@ export default StyleSheet.create({
     marginRight: moderateScale(12),
   },
   radioSelected: { backgroundColor: "#2E7D32" },
-  productText: { fontSize: moderateScale(16), color: "#333" },
+  productText: { fontSize: moderateScale(16), color: "#000" },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -79,7 +79,7 @@ export default StyleSheet.create({
     paddingHorizontal: moderateScale(16),
     backgroundColor: "#f9f9f9",
   },
-  totalText: { fontSize: moderateScale(16), fontWeight: "bold", color: "#2E7D32" },
+  totalText: { fontSize: moderateScale(16), fontWeight: "bold", color: "#000" },
   dateBox: {
     flexDirection: "row",
     alignItems: "center",
@@ -89,7 +89,7 @@ export default StyleSheet.create({
     paddingVertical: moderateScale(12),
     paddingHorizontal: moderateScale(16),
   },
-  dateText: { marginLeft: moderateScale(8), fontSize: moderateScale(15), color: "#333" },
+  dateText: { marginLeft: moderateScale(8), fontSize: moderateScale(15), color: "#000" },
   buttonRow: { flexDirection: "row", justifyContent: "space-between", marginTop: moderateScale(30) },
   button: { flex: 0.48, borderRadius: moderateScale(8), paddingVertical: moderateScale(12), alignItems: "center" },
   buttonText: { color: "#fff", fontSize: moderateScale(16), fontWeight: "bold" },
